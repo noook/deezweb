@@ -4,13 +4,13 @@
       <span>Deezweb</span>
     </router-link>
     <router-link to="/">
-     <i class="fas fa-home"></i>Accueil
+      <font-awesome-icon icon="home" />Accueil
     </router-link>
     <router-link to="/search">
-    <i class="fas fa-search"></i>Rechercher un titre
+      <font-awesome-icon icon="search" />Rechercher un titre
     </router-link>
     <router-link to="/favorites">
-    <i class="fas fa-heart"></i>Mes favoris
+      <font-awesome-icon icon="heartbeat" />Mes favoris
     </router-link>
   </div>
 </template>
@@ -45,7 +45,7 @@ export default Vue.extend({
         font-size: 1.1em;
       }
 
-      > i {
+      > svg {
         margin-right: 5px;
       }
 

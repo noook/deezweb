@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Navbar />
-    <div class="router-view container">
+    <div class="router-view container my-3">
       <router-view/>
     </div>
   </div>
@@ -9,6 +9,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Navbar from '@/components/Navbar.vue';
 
 export default Vue.extend({
