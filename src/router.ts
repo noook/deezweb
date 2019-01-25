@@ -15,7 +15,7 @@ export default new Router({
     {
       path: '/favorites',
       name: 'favorites',
-      component: Home,
+      component: () => import('./views/Favorites.vue'),
     },
     {
       path: '/search',
