@@ -6,9 +6,18 @@
         L'application qui permet facilement d'écouter de la musique.
       </p>
     </div>
-    <div class="random-music">
+    <div
+      class="random-music"
+      v-if="this.$store.state.FAVORITES.length">
       <h2>Une musique de vos favoris au hasard:</h2>
-      <MusicCard />
+      <MusicCard :track="track" />
+      <button
+        @click="shuffle"
+        type="button"
+        class="btn shuffle btn-primary">
+        <font-awesome-icon icon="random" />
+        Choisir une autre musique
+      </button>
     </div>
   </div>
 </template>
@@ -16,11 +25,27 @@
 <script lang="ts">
 import Vue from 'vue';
 import MusicCard from '@/components/MusicCard.vue';
+import { Track } from '@/interfaces/track';
 
 export default Vue.extend({
   name: 'home',
   components: {
     MusicCard,
+  },
+  data() {
+    return {
+      track: {} as Track,
+    };
+  },
+  created() {
+    this.shuffle();
+  },
+  methods: {
+    shuffle() {
+      const favorites = this.$store.state.FAVORITES;
+      const index = Math.floor(Math.random() * favorites.length);
+      this.track = favorites[index];
+    },
   },
 });
 </script>
@@ -48,6 +73,10 @@ export default Vue.extend({
       font-size: 1.5rem;
       font-weight: 600;
       margin: 20px 0;
+    }
+
+    > .shuffle {
+      margin: 10px 0;
     }
   }
 }
