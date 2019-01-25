@@ -13,9 +13,12 @@
         controls>
       </audio>
       <div class="action">
-        <div class="favorite-action" :class="{ added: true }">
+        <div
+          @click="toggle"
+          class="favorite-action"
+          :class="{ added: isFavorite }">
           <font-awesome-icon icon="heart" />
-          {{ true ? removeFromFavorites : addToFavorites }}
+          {{ isFavorite ? removeFromFavorites : addToFavorites }}
         </div>
       </div>
     </div>
@@ -39,6 +42,18 @@ export default Vue.extend({
       addToFavorites: 'Ajouter aux favoris',
       removeFromFavorites: 'Retirer des favoris',
     };
+  },
+  methods: {
+    toggle() {
+      this.$store.dispatch('updateFavorites', this.track);
+    },
+  },
+  computed: {
+    isFavorite(): Boolean {
+      return this.$store.state.FAVORITES
+        .map((item: Track) => item.id)
+        .includes(this.track.id);
+    },
   },
 });
 </script>
