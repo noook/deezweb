@@ -30,12 +30,13 @@
       <button type="submit" class="btn btn-primary">Go</button>
     </form>
     <hr>
-    <h2 v-if="results !== null">Résultats</h2>
+
     <div class="results" v-if="results !== null">
-      <MusicCard
-        :track="music"
-        v-for="music in results"
-        :key="music.id" />
+      <h3 v-if="results.length">Résultats</h3>
+      <MusicCardList
+        v-if="results.length"
+        :tracks="results"/>
+      <h3 v-else>Aucun résultat pour cette recherche ...</h3>
     </div>
   </div>
 </template>
@@ -43,12 +44,12 @@
 <script lang="ts">
 import Vue from 'vue';
 import api from '@/services/api';
-import MusicCard from '@/components/MusicCard.vue';
+import MusicCardList from '@/components/MusicCardList.vue';
 
 export default Vue.extend({
   name: 'Search',
   components: {
-    MusicCard,
+    MusicCardList,
   },
   data() {
     return {
@@ -114,17 +115,13 @@ export default Vue.extend({
       }
     }
 
-    > h2 {
-      font-size: 1.5rem;
-      font-weight: bold;
-      text-align: left;
-      margin: 10px 0;
-    }
-
     > .results {
-      display: grid;
-      grid-gap: 10px;
-      grid-template-columns: repeat(3, 1fr);
+      > h3 {
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-align: left;
+        margin: 10px 0;
+      }
     }
   }
 </style>
