@@ -10,7 +10,7 @@
       class="random-music"
       v-if="this.$store.state.FAVORITES.length">
       <h2>Une musique de vos favoris au hasard:</h2>
-      <MusicCard :track="track" />
+      <MusicCard :track="random" />
       <button
         @click="shuffle"
         type="button"
@@ -34,17 +34,17 @@ export default Vue.extend({
   },
   data() {
     return {
-      track: {} as Track,
+      key: 0,
     };
-  },
-  created() {
-    this.shuffle();
   },
   methods: {
     shuffle() {
-      const favorites = this.$store.state.FAVORITES;
-      const index = Math.floor(Math.random() * favorites.length);
-      this.track = favorites[index];
+      this.$store.dispatch('shuffleFavorite');
+    },
+  },
+  computed: {
+    random(): Track {
+      return this.$store.state.RANDOM_FAVORITE;
     },
   },
 });

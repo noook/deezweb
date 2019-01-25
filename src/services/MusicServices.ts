@@ -19,3 +19,10 @@ export function toggleFavorites(favorites: Array<Track>, track: Track) {
     favorites.push(track);
   }
 }
+
+export function shuffle(favorites: Array<Track>): Array<Track> {
+  return favorites
+    .map((a: Track) => [Math.random(), a])
+    .sort((a: any, b: any) => a[0] - b[0])
+    .map((a: any) => a[1]);
+}

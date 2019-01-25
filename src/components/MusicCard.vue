@@ -17,7 +17,8 @@
           @click="toggle"
           class="favorite-action"
           :class="{ added: isFavorite }">
-          <font-awesome-icon icon="heart" />
+          <font-awesome-icon
+            :icon="isFavorite ? 'heart-broken' : 'heart'" />
           {{ isFavorite ? removeFromFavorites : addToFavorites }}
         </div>
       </div>

@@ -9,11 +9,11 @@ type Artist = {
   id: Number,
   name: String,
   picture: String,
-}
+};
 
 type Album = {
   id: Number,
   title: String,
   cover: String,
   tracklist: String,
-}
+};
