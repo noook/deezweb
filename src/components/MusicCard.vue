@@ -2,14 +2,14 @@
   <div class="music-card card">
     <div class="card-body">
       <div class="row">
-        <img class="thumbnail" src="https://api.deezer.com/album/10532282/image" alt="thumbnail">
+        <img class="thumbnail" :src="track.album.cover" alt="thumbnail">
         <div class="infos">
-          <p class="title">Some Minds</p>
-          <p class="artists">Flume Ft.Andrew Wyatt</p>
+          <p class="title">{{ track.title_short }}</p>
+          <p class="artists">{{ track.artist.name }}</p>
         </div>
       </div>
       <audio
-        src="https://cdns-preview-3.dzcdn.net/stream/c-3fadfb03a63812e921bcf5a16ea2aece-1.mp3"
+        :src="track.preview"
         controls>
       </audio>
       <div class="action">
@@ -24,9 +24,16 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { Track } from '@/interfaces/track';
 
 export default Vue.extend({
   name: 'MusicCard',
+  props: {
+    track: {
+      required: true,
+      type: Object as () => Track,
+    },
+  },
   data() {
     return {
       addToFavorites: 'Ajouter aux favoris',
@@ -44,6 +51,7 @@ export default Vue.extend({
       > .row {
         margin: inherit;
         display: flex;
+        flex-wrap: nowrap;
 
         > .thumbnail {
           margin-right: 10px;
@@ -62,6 +70,8 @@ export default Vue.extend({
 
             &.artists {
               font-size: .9rem;
+              color: #6E7680;
+              font-weight: bold;
             }
           }
         }
