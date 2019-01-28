@@ -1,5 +1,5 @@
-import api from './api';
 import { Track } from '@/interfaces/track';
+import fetchJsonp from 'fetch-jsonp';
 
 export function loadLocalStorage(): Array<Track> {
   return JSON.parse(localStorage.getItem('favorites')!) || [];
@@ -25,4 +25,8 @@ export function shuffle(favorites: Array<Track>): Array<Track> {
     .map((a: Track) => [Math.random(), a])
     .sort((a: any, b: any) => a[0] - b[0])
     .map((a: any) => a[1]);
+}
+
+export function search(params: any): Promise<fetchJsonp.Response> {
+  return fetchJsonp(`https://api.deezer.com/search/?output=jsonp&q=${params.q}&order=${params.order}`);
 }

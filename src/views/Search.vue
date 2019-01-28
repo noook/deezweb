@@ -43,8 +43,8 @@
 
 <script lang="ts">
 import Vue from 'vue';
-import api from '@/services/api';
 import MusicCardList from '@/components/MusicCardList.vue';
+import { search } from '@/services/MusicServices';
 
 export default Vue.extend({
   name: 'Search',
@@ -62,14 +62,12 @@ export default Vue.extend({
   methods: {
     async submit() {
       const { q, order } = this;
-      const tracks = await api
-        .get('/search', {
-          params: {
-            q,
-            order,
-          },
-        })
-        .then(({ data }) => data.data)
+      const tracks = await search({
+        q,
+        order,
+      })
+        .then((res: any) => res.json())
+        .then(({ data }) => data)
         .catch(err => console.log(err)); // eslint-disable-line
 
       this.results = tracks;
